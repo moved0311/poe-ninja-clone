@@ -1,0 +1,15 @@
+{
+    "rules": {
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "no-any": true,
+        "curly": true
+    },
+    "linterOptions": {
+        "exclude": [
+            "**/node_modules/**"
+        ]
+    }
+}

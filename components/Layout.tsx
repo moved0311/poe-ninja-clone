@@ -1,26 +1,31 @@
-import React, { ReactNode } from 'react'
-import Head from 'next/head'
-import Header from './Header'
+import React, { ReactNode } from "react";
+import Head from "next/head";
+import Header from "./Header";
+import styled from "styled-components";
 
 type Props = {
-  children?: ReactNode
-  title?: string
-}
+  children?: ReactNode;
+  title?: string;
+};
+const Container = styled.div`
+  font-family: "IBM Plex Mono", "monospace";
+  background-image: url("/bg2.jpg");
+  height: 100vh;
+`;
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
+const Layout = ({ children, title = "This is the default title" }: Props) => (
+  <Container>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Header/>
+    <Header />
     {children}
     <footer>
-      <hr />
       <span>I'm here to stay (Footer)</span>
     </footer>
-  </div>
-)
+  </Container>
+);
 
-export default Layout
+export default Layout;
