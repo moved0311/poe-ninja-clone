@@ -3,5 +3,7 @@ export const Colors = {
   TABLEBACKGROUND: "#192129",
   WHITE: "#ffffff",
   CYAN: "#10b77f",
+  BLACK: "#06080a",
+  RATEBACKGROUD: "#1e1e1ecc",
   GREY: "#22313f",
 };

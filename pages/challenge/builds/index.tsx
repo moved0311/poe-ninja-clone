@@ -6,7 +6,12 @@ import _ from "lodash";
 import { Colors } from "../../../assets/Colors";
 import styled from "styled-components";
 import Link from "next/link";
+import ClassUsageRateComponent from "../../../components/ClassUsageRate";
+import { mockClassUsageRate } from "../../../utils/classUsageRate";
 
+const Container = styled.div`
+  margin-top: 8px;
+`;
 const Table = styled.table`
   color: ${Colors.WHITE};
   background: ${Colors.TABLEBACKGROUND};
@@ -37,12 +42,17 @@ const CharacterLink = styled.div`
     text-decoration: none;
   }
 `;
+const Setting = styled.div`
+  height: 130px;
+  width: 100%;
+`;
 
 const Challenge = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const init = async () => {
       let ladderObj = await getLadder();
+      console.log(ladderObj);
       setData(_.get(ladderObj, "entries", []));
     };
     init();
@@ -82,36 +92,39 @@ const Challenge = () => {
 
   return (
     <Layout>
-      <h1>Challenge</h1>
-      <Table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <TableTitle {...column.getHeaderProps()}>
-                  {column.render("Header")}
-                </TableTitle>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <TableCell {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </TableCell>
-                  );
-                })}
+      <Setting />
+      <ClassUsageRateComponent data={mockClassUsageRate} />
+      <Container>
+        <Table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <TableTitle {...column.getHeaderProps()}>
+                    {column.render("Header")}
+                  </TableTitle>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <TableCell {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                      </TableCell>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Container>
     </Layout>
   );
 };
