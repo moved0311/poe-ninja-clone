@@ -10,7 +10,7 @@ type Props = {
 const Container = styled.div`
   font-family: "IBM Plex Mono", "monospace";
   background-image: url("/bg2.jpg");
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const Layout = ({ children, title = "This is the default title" }: Props) => (
