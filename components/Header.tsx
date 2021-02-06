@@ -71,6 +71,9 @@ const Header = () => {
         </LogoContainer>
       </Link>
       <Categories>
+        <ActiveLink isActive={router.pathname === "/economy"}>
+          <Link href="/economy">Economy</Link>
+        </ActiveLink>
         <ActiveLink isActive={router.pathname === "/challenge/builds"}>
           <Link href="/challenge/builds">Builds</Link>
         </ActiveLink>

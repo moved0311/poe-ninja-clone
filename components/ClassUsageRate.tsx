@@ -14,7 +14,7 @@ const Container = styled.div`
   width: 100%;
 `;
 const LayoutContainer = styled.div`
-  width: 60.5px;
+  width: calc(100% / 19 - 2px);
   height: 80px;
   margin-right: 2px;
   position: relative;

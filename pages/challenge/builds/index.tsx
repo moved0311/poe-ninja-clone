@@ -11,13 +11,65 @@ import { mockClassUsageRate } from "../../../utils/classUsageRate";
 
 const Container = styled.div`
   margin-top: 8px;
+  display: flex;
 `;
+const LeftContainer = styled.div`
+  max-width: 215px;
+  width: 100%;
+  margin-right: 8px;
+`;
+const RightContainer = styled.div`
+  flex: 1;
+`;
+const CharacterFoundContainer = styled.div`
+  width: 100%;
+  height: 56px;
+  background: ${Colors.GRIDBACKGROUND};
+  border-radius: 0.5rem;
+  margin-bottom: 8px;
+  color: ${Colors.WHITE};
+  display: flex;
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+`;
+const SearchFilterContainer = styled.div`
+  width: 100%;
+  height: 56px;
+  background: ${Colors.GRIDBACKGROUND};
+  border-radius: 0.5rem;
+  margin-bottom: 8px;
+`;
+const GridTitle = styled.div`
+  color: ${Colors.GREYTITLE};
+  padding: 10.5px;
+  font-size: 12.25px;
+  font-weight: bold;
+`;
+const Items = styled.div`
+  width: 100%;
+  height: 100%;
+  max-height: 392px;
+  background: ${Colors.GRIDBACKGROUND};
+  border-radius: 0.5rem;
+  margin-bottom: 8px;
+`;
+const MainSkill = styled.div`
+  width: 100%;
+  height: 100%;
+  max-height: 392px;
+  background: ${Colors.GRIDBACKGROUND};
+  border-radius: 0.5rem;
+  margin-bottom: 8px;
+`;
+
 const Table = styled.table`
   color: ${Colors.WHITE};
   background: ${Colors.TABLEBACKGROUND};
   text-align: right;
   border-collapse: collapse;
   border-radius: 0.5rem;
+  width: 100%;
 `;
 const TableTitle = styled.th`
   font-weight: bold;
@@ -95,35 +147,49 @@ const Challenge = () => {
       <Setting />
       <ClassUsageRateComponent data={mockClassUsageRate} />
       <Container>
-        <Table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <TableTitle {...column.getHeaderProps()}>
-                    {column.render("Header")}
-                  </TableTitle>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <TableCell {...cell.getCellProps()}>
-                        {cell.render("Cell")}
-                      </TableCell>
-                    );
-                  })}
+        <LeftContainer>
+          <SearchFilterContainer />
+          <Items>
+            <GridTitle>ITEMS</GridTitle>
+          </Items>
+          <MainSkill>
+            <GridTitle>MAIN SKILL (5+ LINKS)</GridTitle>
+          </MainSkill>
+        </LeftContainer>
+        <RightContainer>
+          <CharacterFoundContainer>
+            <div>Found xxxxx characters.</div>
+          </CharacterFoundContainer>
+          <Table {...getTableProps()}>
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <TableTitle {...column.getHeaderProps()}>
+                      {column.render("Header")}
+                    </TableTitle>
+                  ))}
                 </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <TableCell {...cell.getCellProps()}>
+                          {cell.render("Cell")}
+                        </TableCell>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </RightContainer>
       </Container>
     </Layout>
   );

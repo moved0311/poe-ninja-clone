@@ -9,9 +9,18 @@ type Props = {
   title?: string;
 };
 const Container = styled.div`
-  font-family: "IBM Plex Mono", "monospace";
-  background-image: url("/bg2.jpg");
-  min-height: 100vh;
+  background: linear-gradient(
+      transparent 100vh,
+      ${Colors.BLACK} 150vh,
+      ${Colors.BLACK1}
+    ),
+    ${Colors.BLACK};
+`;
+const BackgroundImage = styled.div`
+  min-height: 150vh;
+  background: linear-gradient(177deg, transparent 30vh, ${Colors.BLACK} 150vh),
+    url(/bg2.jpg);
+  background-repeat: no-repeat;
 `;
 const ContentContainer = styled.div`
   max-width: 1218px;
@@ -21,16 +30,15 @@ const ContentContainer = styled.div`
 
 const Layout = ({ children, title = "This is the default title" }: Props) => (
   <Container>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <Header />
-    <ContentContainer>{children}</ContentContainer>
-    <footer>
-      <span>I'm here to stay (Footer)</span>
-    </footer>
+    <BackgroundImage>
+      <Head>
+        <title>{title}</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Header />
+      <ContentContainer>{children}</ContentContainer>
+    </BackgroundImage>
   </Container>
 );
 
