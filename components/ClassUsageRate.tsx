@@ -1,28 +1,28 @@
-import { ClassUsageRate } from "../interfaces";
-import styled from "styled-components";
-import { Colors } from "../assets/Colors";
+import { ClassUsageRate, ClassProps } from '../interfaces'
+import styled from 'styled-components'
+import { Colors } from '../assets/Colors'
 
 type Props = {
-  data: ClassUsageRate[];
-};
+  data: ClassProps
+}
 type LayoutProps = {
-  data: ClassUsageRate;
-};
+  data: ClassUsageRate
+}
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-`;
+`
 const LayoutContainer = styled.div`
   width: calc(100% / 19 - 2px);
   height: 80px;
   margin-right: 2px;
   position: relative;
-`;
+`
 const Avatar = styled.img`
   width: 100%;
   height: 63px;
-`;
+`
 const Title = styled.div`
   height: 17px;
   width: 100%;
@@ -32,7 +32,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   overflow: hidden;
-`;
+`
 const Rate = styled.div`
   background: ${Colors.RATEBACKGROUD};
   font-size: 12px;
@@ -44,7 +44,7 @@ const Rate = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
-`;
+`
 
 const ClassUsageRateLayout = ({ data }: LayoutProps) => {
   return (
@@ -53,15 +53,18 @@ const ClassUsageRateLayout = ({ data }: LayoutProps) => {
       <Avatar src={`/${data.class}_avatar.png`} />
       <Rate>{data.rate}%</Rate>
     </LayoutContainer>
-  );
-};
+  )
+}
 const ClassUsageRateComponent = ({ data }: Props) => {
+  let entries = Object.entries(data)
+  let sorted = entries.sort((a, b) => b[1] - a[1])
   return (
     <Container>
-      {data.map((item) => (
-        <ClassUsageRateLayout data={item} key={item.class} />
-      ))}
+      {sorted.map((arr, idx) => {
+        let useRate = { class: arr[0], rate: arr[1] }
+        return <ClassUsageRateLayout data={useRate} key={idx} />
+      })}
     </Container>
-  );
-};
-export default ClassUsageRateComponent;
+  )
+}
+export default ClassUsageRateComponent
